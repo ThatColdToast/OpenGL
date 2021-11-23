@@ -2,6 +2,7 @@
 
 #include <GL/glew.h>
 
+#include "ASSERT.h"
 #include "GLCall.h" // Includes "ASSERT"
 
 IndexBuffer::IndexBuffer(const unsigned int* data, unsigned int count)
