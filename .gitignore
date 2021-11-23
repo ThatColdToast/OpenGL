@@ -1,3 +1,5 @@
 .vs/**
-OpenGLL/x64/**
+x64/**
+
+OpenGL/x64/**
 OpenGL/ingui.ini
