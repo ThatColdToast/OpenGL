@@ -24,6 +24,7 @@
 
 #include "tests/Test.h"
 #include "tests/TestClearColor.h"
+#include "tests/TestTexture2D.h"
 
 int main(void)
 {
@@ -143,6 +144,7 @@ int main(void)
 		currentTest = testMenu;
 
 		testMenu->RegisterTest<test::TestClearColor>("Clear Color");
+		testMenu->RegisterTest<test::TestTexture2D>("Texture 2D");
 
 		Renderer renderer;
 
@@ -201,11 +203,20 @@ int main(void)
 					currentTest->OnUpdate(0.0f);
 					currentTest->OnRender();
 
-					ImGui::Begin("Tests");
-					if (currentTest != testMenu && ImGui::Button("<-"))
+					ImGui::Begin("Test");
+					if (currentTest != testMenu)
 					{
-						delete currentTest;
+						bool buttonVal = ImGui::Button("<-");
+						ImGui::SameLine();
+						ImGui::Text("Clear Color");
+						ImGui::SameLine(ImGui::GetWindowWidth() - 132);
+						ImGui::Text("%.1f FPS(%.2f ms)", ImGui::GetIO().Framerate, 1000.0f / ImGui::GetIO().Framerate);
+
+						if (buttonVal)
+						{
+							delete currentTest;
 							currentTest = testMenu;
+						}
 					}
 
 					currentTest->OnImGuiRender();
