@@ -8,20 +8,25 @@
 
 #include "GLCall.h"
 
+#include "cherno/Instrumentor.h"
+
 Shader::Shader(const std::string& filepath)
 	: m_FilePath(filepath), m_RendererID(0)
 {
+	PROFILE_FUNCTION();
 	ShaderProgramSource source = ParseShader("res/shaders/Basic.shader");
 	m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
 }
 
 Shader::~Shader()
 {
+	PROFILE_FUNCTION();
 	GLCall(glDeleteProgram(m_RendererID));
 }
 
 ShaderProgramSource Shader::ParseShader(const std::string& filepath)
 {
+	PROFILE_FUNCTION();
 	std::ifstream stream(filepath);
 
 	enum class ShaderType
@@ -55,6 +60,7 @@ ShaderProgramSource Shader::ParseShader(const std::string& filepath)
 
 unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
 {
+	PROFILE_FUNCTION();
 	GLCall(unsigned int id = glCreateShader(type));
 	const char* src = source.c_str();
 	GLCall(glShaderSource(id, 1, &src, nullptr));
@@ -88,6 +94,7 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
 
 unsigned int Shader::CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
 {
+	PROFILE_FUNCTION();
 	GLCall(unsigned int program = glCreateProgram());
 	GLCall(unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader));
 	GLCall(unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader));
@@ -105,36 +112,43 @@ unsigned int Shader::CreateShader(const std::string& vertexShader, const std::st
 
 void Shader::Bind() const
 {
+	PROFILE_FUNCTION();
 	GLCall(glUseProgram(m_RendererID));
 }
 
 void Shader::Unbind() const
 {
+	PROFILE_FUNCTION();
 	GLCall(glUseProgram(0));
 }
 
 void Shader::SetUniform1i(const std::string& name, int value)
 {
+	PROFILE_FUNCTION();
 	GLCall(glUniform1i(GetUniformLocation(name), value));
 }
 
 void Shader::SetUniform1f(const std::string& name, float value)
 {
+	PROFILE_FUNCTION();
 	GLCall(glUniform1f(GetUniformLocation(name), value));
 }
 
 void Shader::SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3)
 {
+	PROFILE_FUNCTION();
 	GLCall(glUniform4f(GetUniformLocation(name), v0, v1, v2, v3));
 }
 
 void Shader::SetUniformMat4f(const std::string& name, const glm::mat4& matrix)
 {
+	PROFILE_FUNCTION();
 	GLCall(glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, &matrix[0][0]));
 }
 
 int Shader::GetUniformLocation(const std::string& name)
 {
+	PROFILE_FUNCTION();
 	if (m_UniformLocationCache.find(name) != m_UniformLocationCache.end())
 		return m_UniformLocationCache[name];
 

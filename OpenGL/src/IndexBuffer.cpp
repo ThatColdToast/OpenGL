@@ -5,9 +5,12 @@
 #include "ASSERT.h"
 #include "GLCall.h" // Includes "ASSERT"
 
+#include "cherno/Instrumentor.h"
+
 IndexBuffer::IndexBuffer(const unsigned int* data, unsigned int count)
     : m_Count(count)
 {
+    PROFILE_FUNCTION();
     ASSERT(sizeof(unsigned int) == sizeof(GLuint));
 
     GLCall(glGenBuffers(1, &m_RendererID));
@@ -17,15 +20,18 @@ IndexBuffer::IndexBuffer(const unsigned int* data, unsigned int count)
 
 IndexBuffer::~IndexBuffer()
 {
+    PROFILE_FUNCTION();
     GLCall(glDeleteBuffers(1, &m_RendererID));
 }
 
 void IndexBuffer::Bind() const
 {
+    PROFILE_FUNCTION();
     GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID));
 }
 
 void IndexBuffer::Unbind() const
 {
+    PROFILE_FUNCTION();
     GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 }

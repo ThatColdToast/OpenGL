@@ -2,21 +2,26 @@
 
 #include <GL/glew.h>
 
+#include "cherno/Instrumentor.h"
+
 #include "GLCall.h"
 #include "VertexBufferLayout.h"
 
 VertexArray::VertexArray()
 {
+	PROFILE_FUNCTION();
 	GLCall(glGenVertexArrays(1, &m_RendererID));
 }
 
 VertexArray::~VertexArray()
 {
+	PROFILE_FUNCTION();
 	GLCall(glDeleteVertexArrays(1, &m_RendererID));
 }
 
 void VertexArray::AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout)
 {
+	PROFILE_FUNCTION();
 	Bind();
 	vb.Bind();
 	const auto& elements = layout.GetElements();
@@ -33,10 +38,12 @@ void VertexArray::AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& la
 
 void VertexArray::Bind() const
 {
+	PROFILE_FUNCTION();
 	GLCall(glBindVertexArray(m_RendererID));
 }
 
 void VertexArray::Unbind() const
 {
+	PROFILE_FUNCTION();
 	GLCall(glBindVertexArray(0));
 }

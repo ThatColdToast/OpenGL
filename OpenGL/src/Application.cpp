@@ -20,8 +20,11 @@
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui_impl_glfw.h"
 
+#include "cherno/Instrumentor.h"
+
 int main(void)
 {
+	Instrumentor::Get().BeginSession("Init", "init.json");
 	/* GLFW INIT */
 	GLFWwindow* window;
 	int width = 960, height = 540;
@@ -29,6 +32,8 @@ int main(void)
 	 // ImGui_ImplOpenGL3_Init();
 	
 	{
+		PROFILE_SCOPE("Init GLFW Library");
+
 		/* Initialize the library */
 		if (!glfwInit())
 			return -1;
@@ -36,9 +41,16 @@ int main(void)
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	}
 
+	{
+		PROFILE_SCOPE("Init Window");
 		/* Create a windowed mode window and its OpenGL context */
 		window = glfwCreateWindow(width, height, "Hello World", NULL, NULL);
+	}
+
+	{
+		PROFILE_SCOPE("Test GLFW window");
 		if (!window)
 		{
 			glfwTerminate();
@@ -53,6 +65,7 @@ int main(void)
 
 	/* GLEW INIT */
 	{
+		PROFILE_SCOPE("Init GLEW Library");
 		if (glewInit() != GLEW_OK)
 			std::cout << "Error: glewInit()" << std::endl; // uta.edu/admissions
 
@@ -125,9 +138,12 @@ int main(void)
 
 		Renderer renderer;
 
+		Instrumentor::Get().EndSession();
+		Instrumentor::Get().BeginSession("Loop", "loop.json");
 		/* Loop until the user closes the window */
 		while (!glfwWindowShouldClose(window))
 		{
+			PROFILE_SCOPE("Render");
 			//glfwGetWindowSize(window, &width, &height);
 
 			/* Render here */
@@ -142,6 +158,7 @@ int main(void)
 			// shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
 
 			{
+				PROFILE_SCOPE("Set 1st Uniform Mat4");
 				glm::mat4 model = glm::translate(glm::mat4(1.0f), translationA);
 				glm::mat4 mvp = proj * view * model;
 				shader.SetUniformMat4f("u_MVP", mvp);
@@ -150,6 +167,7 @@ int main(void)
 			}
 
 			{
+				PROFILE_SCOPE("Set 2nd Uniform Mat4");
 				glm::mat4 model = glm::translate(glm::mat4(1.0f), translationB);
 				glm::mat4 mvp = proj * view * model;
 				shader.SetUniformMat4f("u_MVP", mvp);
@@ -160,6 +178,7 @@ int main(void)
 			// GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 
 			{
+				PROFILE_SCOPE("ImGui State");
 				ImGui::Begin("Hello, world!");
 				ImGui::SliderFloat3("Translation A", &translationA.x, 0.0f, 960.0f);
 				ImGui::SliderFloat3("Translation B", &translationB.x, 0.0f, 960.0f);
@@ -168,16 +187,26 @@ int main(void)
 				ImGui::End();
 			}
 
-			ImGui::Render();
-			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+			{
+				PROFILE_SCOPE("ImGui Render");
+				ImGui::Render();
+				ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+			}
 
-			/* Swap front and back buffers */
-			glfwSwapBuffers(window);
+			{
+				PROFILE_SCOPE("Swap Buffers");
+				/* Swap front and back buffers */
+				glfwSwapBuffers(window);
+			}
 
-			/* Poll for and process events */
-			glfwPollEvents();
+			{
+				PROFILE_SCOPE("GLFW Poll Events");
+				/* Poll for and process events */
+				glfwPollEvents();
+			}
 		}
 	}
+	Instrumentor::Get().EndSession();
 
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui::DestroyContext();
