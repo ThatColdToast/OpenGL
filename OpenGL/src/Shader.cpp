@@ -8,7 +8,7 @@
 
 #include "GLCall.h"
 
-#include "cherno/Instrumentor.h"
+#include "Profiling.h"
 
 Shader::Shader(const std::string& filepath)
 	: m_FilePath(filepath), m_RendererID(0)

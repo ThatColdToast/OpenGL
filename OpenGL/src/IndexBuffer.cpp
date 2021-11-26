@@ -4,7 +4,7 @@
 
 #include "GLCall.h" // Includes "ASSERT"
 
-#include "cherno/Instrumentor.h"
+#include "Profiling.h"
 
 IndexBuffer::IndexBuffer(const unsigned int* data, unsigned int count)
     : m_Count(count)

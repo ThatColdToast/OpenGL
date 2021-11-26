@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "cherno/Instrumentor.h"
+#include "Profiling.h"
 
 #include "GLCall.h"
 

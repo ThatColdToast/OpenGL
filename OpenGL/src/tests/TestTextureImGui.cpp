@@ -1,7 +1,7 @@
 #include "TestTextureImGui.h"
 
 #include "vendor/imgui/imgui.h"
-#include "vendor/cherno/Instrumentor.h"
+#include "Profiling.h"
 
 #include "glm/gtc/matrix_transform.hpp"
 

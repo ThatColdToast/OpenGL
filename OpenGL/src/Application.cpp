@@ -20,7 +20,7 @@
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui_impl_glfw.h"
 
-#include "cherno/Instrumentor.h"
+#include "Profiling.h"
 
 #include "tests/Test.h"
 #include "tests/TestClearColor.h"

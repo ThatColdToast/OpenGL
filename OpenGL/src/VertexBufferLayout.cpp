@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "cherno/Instrumentor.h"
+#include "Profiling.h"
 
 VertexBufferLayout::VertexBufferLayout()
 	: m_Stride(0) {}

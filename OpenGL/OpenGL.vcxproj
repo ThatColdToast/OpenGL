@@ -160,7 +160,7 @@
     <ClCompile Include="src\tests\TestTexture2D.cpp" />
     <ClCompile Include="src\tests\TestTextureImGui.cpp" />
     <ClCompile Include="src\Texture.cpp" />
-    <ClCompile Include="src\vendor\cherno\Instrumentor.h" />
+    <ClCompile Include="src\Profiling.h" />
     <ClCompile Include="src\vendor\glm\detail\glm.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui_demo.cpp" />

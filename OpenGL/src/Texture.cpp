@@ -1,7 +1,7 @@
 #include "Texture.h"
 
 #include "stb_image/stb_image.h"
-#include "cherno/Instrumentor.h"
+#include "Profiling.h"
 
 Texture::Texture(const std::string& filepath)
 	: m_RendererID(0), m_FilePath(filepath), m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BPP(0)
