@@ -2,7 +2,6 @@
 
 #include <GL/glew.h>
 
-#include "ASSERT.h"
 #include "GLCall.h" // Includes "ASSERT"
 
 #include "cherno/Instrumentor.h"

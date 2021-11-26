@@ -22,6 +22,9 @@
 
 #include "cherno/Instrumentor.h"
 
+#include "tests/Test.h"
+#include "tests/TestClearColor.h"
+
 int main(void)
 {
 	Instrumentor::Get().BeginSession("Init", "init.json");
@@ -73,54 +76,56 @@ int main(void)
 	}
 
 	{
-		float positions[] = {
-			-50.0f, -50.0f, 0.0f, 0.0f, // 0
-			 50.0f, -50.0f, 1.0f, 0.0f, // 1
-			 50.0f,  50.0f, 1.0f, 1.0f, // 2
-			-50.0f,  50.0f, 0.0f, 1.0f  // 3
-		};
+		//float positions[] = {
+		//	-50.0f, -50.0f, 0.0f, 0.0f, // 0
+		//	 50.0f, -50.0f, 1.0f, 0.0f, // 1
+		//	 50.0f,  50.0f, 1.0f, 1.0f, // 2
+		//	-50.0f,  50.0f, 0.0f, 1.0f  // 3
+		//};
 
-		unsigned int indices[] =
-		{
-			0, 1, 2,
-			2, 3, 0
-		};
+		//unsigned int indices[] =
+		//{
+		//	0, 1, 2,
+		//	2, 3, 0
+		//};
 
 		/* OpenGL Blending Mode */
 		GLCall(glEnable(GL_BLEND));
 		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
-		VertexArray va;
+		//VertexArray va;
 
-		VertexBuffer vb(positions, 4 * 4 * sizeof(float));
+		//VertexBuffer vb(positions, 4 * 4 * sizeof(float));
 
-		VertexBufferLayout layout;
-		layout.Push<float>(2); // Push 2 Positions ()
-		layout.Push<float>(2); // Push 2 TexCoords
-		va.AddBuffer(vb, layout);
+		//VertexBufferLayout layout;
+		//layout.Push<float>(2); // Push 2 Positions ()
+		//layout.Push<float>(2); // Push 2 TexCoords
+		//va.AddBuffer(vb, layout);
 
-		IndexBuffer ib(indices, 6);
+		//IndexBuffer ib(indices, 6);
 
 
-		// shader.SetUniform4f("u_Color", 0.2f, 0.3f, 0.8f, 1.0f);
-		glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
-		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+		//// shader.SetUniform4f("u_Color", 0.2f, 0.3f, 0.8f, 1.0f);
+		//glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
+		//glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 
-		Shader shader("res/shaders/Basic.shader");
-		shader.Bind();
+		//Shader shader("res/shaders/Basic.shader");
+		//shader.Bind();
 
-		Texture texture("res/textures/dirt.png");
-		texture.Bind();
-		shader.SetUniform1i("u_Texture", 0);
+		//Texture texture("res/textures/dirt.png");
+		//texture.Bind();
+		//shader.SetUniform1i("u_Texture", 0);
 
-		va.Unbind();
-		vb.Unbind();
-		ib.Unbind();
-		shader.Unbind();
+		//va.Unbind();
+		//vb.Unbind();
+		//ib.Unbind();
+		//shader.Unbind();
 
 		ImGui::CreateContext();
 
 		ImGui::StyleColorsDark();
+
+
 
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
 
@@ -128,13 +133,16 @@ int main(void)
 		ImGui_ImplOpenGL3_Init(glsl_version);
 
 
-		glm::vec3 translationA(200, 200, 0);
-		glm::vec3 translationB(400, 200, 0);
-
 		// Our state
 		/*bool show_demo_window = true;
 		bool show_another_window = false;
 		ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);*/
+
+		test::Test* currentTest = nullptr;
+		test::TestMenu* testMenu = new test::TestMenu(currentTest);
+		currentTest = testMenu;
+
+		testMenu->RegisterTest<test::TestClearColor>("Clear Color");
 
 		Renderer renderer;
 
@@ -147,17 +155,13 @@ int main(void)
 			//glfwGetWindowSize(window, &width, &height);
 
 			/* Render here */
+			GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
 			renderer.Clear();
 
-			// Start the Dear ImGui frame
-			ImGui_ImplOpenGL3_NewFrame();
-			ImGui_ImplGlfw_NewFrame();
-			ImGui::NewFrame();
-
-			shader.Bind();
+			//shader.Bind();
 			// shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
 
-			{
+			/*{
 				PROFILE_SCOPE("Set 1st Uniform Mat4");
 				glm::mat4 model = glm::translate(glm::mat4(1.0f), translationA);
 				glm::mat4 mvp = proj * view * model;
@@ -175,8 +179,6 @@ int main(void)
 				renderer.Draw(va, ib, shader);
 			}
 
-			// GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
-
 			{
 				PROFILE_SCOPE("ImGui State");
 				ImGui::Begin("Hello, world!");
@@ -185,10 +187,31 @@ int main(void)
 
 				ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 				ImGui::End();
-			}
+			}*/
 
 			{
 				PROFILE_SCOPE("ImGui Render");
+				// Start the Dear ImGui frame
+				ImGui_ImplOpenGL3_NewFrame();
+				ImGui_ImplGlfw_NewFrame();
+				ImGui::NewFrame();
+
+				if (currentTest)
+				{
+					currentTest->OnUpdate(0.0f);
+					currentTest->OnRender();
+
+					ImGui::Begin("Tests");
+					if (currentTest != testMenu && ImGui::Button("<-"))
+					{
+						delete currentTest;
+							currentTest = testMenu;
+					}
+
+					currentTest->OnImGuiRender();
+					ImGui::End();
+				}
+
 				ImGui::Render();
 				ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 			}
