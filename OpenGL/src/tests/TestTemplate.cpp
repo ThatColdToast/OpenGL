@@ -1,30 +1,31 @@
-#include "TestTexture2D.h"
+#include "TestTemplate.h"
 
 #include <GL/glew.h>
+#include "Profiling.h"
 #include "GLCall.h"
 #include "vendor/imgui/imgui.h"
 
 namespace test
 {
-	TestTexture2D::TestTexture2D()
+	TestTemplate::TestTemplate()
+	{
+		PROFILE_FUNCTION();
+		m_Name = "Test Template";
+	}
+
+	TestTemplate::~TestTemplate()
 	{
 	}
 
-	TestTexture2D::~TestTexture2D()
+	void TestTemplate::OnUpdate(float deltaTime)
 	{
 	}
 
-	void TestTexture2D::OnUpdate(float deltaTime)
+	void TestTemplate::OnRender()
 	{
 	}
 
-	void TestTexture2D::OnRender()
-	{
-		GLCall(glClearColor(0.0f, 0.0f, 0.0f, 0.0f));
-		GLCall(glClear(GL_COLOR_BUFFER_BIT));
-	}
-
-	void TestTexture2D::OnImGuiRender()
+	void TestTemplate::OnImGuiRender()
 	{
 	}
 }

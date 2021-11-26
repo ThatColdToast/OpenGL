@@ -4,12 +4,12 @@
 
 namespace test
 {
-	class TestTexture2D : public Test
+	class TestTemplate : public Test
 	{
 	private:
 	public:
-		TestTexture2D();
-		~TestTexture2D();
+		TestTemplate();
+		~TestTemplate();
 
 		void OnUpdate(float deltaTime) override;
 		void OnRender() override;

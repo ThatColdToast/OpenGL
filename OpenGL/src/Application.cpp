@@ -160,37 +160,6 @@ int main(void)
 			GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
 			renderer.Clear();
 
-			//shader.Bind();
-			// shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
-
-			/*{
-				PROFILE_SCOPE("Set 1st Uniform Mat4");
-				glm::mat4 model = glm::translate(glm::mat4(1.0f), translationA);
-				glm::mat4 mvp = proj * view * model;
-				shader.SetUniformMat4f("u_MVP", mvp);
-
-				renderer.Draw(va, ib, shader);
-			}
-
-			{
-				PROFILE_SCOPE("Set 2nd Uniform Mat4");
-				glm::mat4 model = glm::translate(glm::mat4(1.0f), translationB);
-				glm::mat4 mvp = proj * view * model;
-				shader.SetUniformMat4f("u_MVP", mvp);
-
-				renderer.Draw(va, ib, shader);
-			}
-
-			{
-				PROFILE_SCOPE("ImGui State");
-				ImGui::Begin("Hello, world!");
-				ImGui::SliderFloat3("Translation A", &translationA.x, 0.0f, 960.0f);
-				ImGui::SliderFloat3("Translation B", &translationB.x, 0.0f, 960.0f);
-
-				ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-				ImGui::End();
-			}*/
-
 			{
 				PROFILE_SCOPE("ImGui Render");
 				// Start the Dear ImGui frame
@@ -208,7 +177,7 @@ int main(void)
 					{
 						bool buttonVal = ImGui::Button("<-");
 						ImGui::SameLine();
-						ImGui::Text("Clear Color");
+						ImGui::Text(currentTest->m_Name);
 						ImGui::SameLine(ImGui::GetWindowWidth() - 132);
 						ImGui::Text("%.1f FPS(%.2f ms)", ImGui::GetIO().Framerate, 1000.0f / ImGui::GetIO().Framerate);
 

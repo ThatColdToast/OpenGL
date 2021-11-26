@@ -22,6 +22,8 @@ namespace test
 	{
 		PROFILE_FUNCTION();
 
+		m_Name = "Texture 2D";
+
 		float positions[] = {
 			-50.0f, -50.0f, 0.0f, 0.0f, // 0
 			 50.0f, -50.0f, 1.0f, 0.0f, // 1
@@ -77,8 +79,8 @@ namespace test
 
 	void TestTexture2D::OnRender()
 	{
-		GLCall(glClearColor(0.0f, 0.0f, 0.0f, 0.0f));
-		GLCall(glClear(GL_COLOR_BUFFER_BIT));
+		//GLCall(glClearColor(0.0f, 0.0f, 0.0f, 0.0f));
+		//GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
 		Renderer renderer;
 

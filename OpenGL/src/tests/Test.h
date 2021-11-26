@@ -10,7 +10,9 @@ namespace test
 	class Test
 	{
 	public:
-		Test() {}
+		const char* m_Name;
+
+		Test() : m_Name("Empty Test") {}
 		virtual ~Test() {}
 
 		virtual void OnUpdate(float deltaTime) {}

@@ -124,25 +124,36 @@ void Shader::Unbind() const
 
 void Shader::SetUniform1i(const std::string& name, int value)
 {
-	PROFILE_FUNCTION();
 	GLCall(glUniform1i(GetUniformLocation(name), value));
 }
 
 void Shader::SetUniform1f(const std::string& name, float value)
 {
-	PROFILE_FUNCTION();
 	GLCall(glUniform1f(GetUniformLocation(name), value));
 }
 
-void Shader::SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3)
+void Shader::SetUniform2f(const std::string& name, const glm::vec2& value)
 {
-	PROFILE_FUNCTION();
-	GLCall(glUniform4f(GetUniformLocation(name), v0, v1, v2, v3));
+	GLCall(glUniform2f(GetUniformLocation(name), value.x, value.y));
+}
+
+void Shader::SetUniform3f(const std::string& name, const glm::vec3& value)
+{
+	GLCall(glUniform3f(GetUniformLocation(name), value.x, value.y, value.z));
+}
+
+void Shader::SetUniform4f(const std::string& name, const glm::vec4& value)
+{
+	GLCall(glUniform4f(GetUniformLocation(name), value.x, value.y, value.z, value.w));
+}
+
+void Shader::SetUniformMat3f(const std::string& name, const glm::mat3& matrix)
+{
+	GLCall(glUniformMatrix3fv(GetUniformLocation(name), 1, GL_FALSE, &matrix[0][0]));
 }
 
 void Shader::SetUniformMat4f(const std::string& name, const glm::mat4& matrix)
 {
-	PROFILE_FUNCTION();
 	GLCall(glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, &matrix[0][0]));
 }
 
