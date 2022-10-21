@@ -10,8 +10,8 @@
 #include "Shader.h"
 #include "Texture.h"
 
-#include "../../Dependencies/GLEW/include/GL/glew.h"
-#include "../../Dependencies/GLFW/include/GLFW/glfw3.h"
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 #include "vendor/glm/glm.hpp"
 #include "vendor/glm/gtc/matrix_transform.hpp"
