@@ -1,12 +1,12 @@
 #pragma once
 
-#include <GL/glew.h>
+#include "../../Dependencies/GLEW/include/GL/glew.h"
 
 #include "VertexArray.h"
 #include "IndexBuffer.h"
 #include "Shader.h"
 
-class Renderer
+class Renderer 
 {
 public:
     void Clear() const;

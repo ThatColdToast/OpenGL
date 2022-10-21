@@ -1,0 +1,17 @@
+#SHELL=powershell
+OBJECTS := $(shell powershell /C dir -Include *.cpp -Recurse -Name)
+#OBJECTS=$(dir)
+#OBJECTS := $(wildcard OpenGl/*/*.cpp)
+#OBJECTS := $(wildcard *.cpp)
+#OBJECTS := src/Application.cpp
+
+# Linux
+# find . -type f -name "*.php"
+
+# Windows
+# dir -Include *.cpp -Recurse -Name
+
+.PHONY: default
+
+default:
+	@echo OBJS "$(OBJECTS)"
