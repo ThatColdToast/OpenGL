@@ -6,7 +6,7 @@ LDLIBS = Dependencies/GLEW/lib/Release/x64/glew32.lib Dependencies/GLFW/include/
 
 CXX = g++
 
-CXXFLAGS= -g -Wall -isystem Dependencies/GLEW/include Dependencies/GLFW/include
+CXXFLAGS= -g -Wall -std=c++17 -pthread -isystem Dependencies/GLEW/include -isystem Dependencies/GLFW/include
 EXEFLAGS= -Wall #-g
 
 # this ensures that if there is a file called default, all or clean, it will still be compiled
