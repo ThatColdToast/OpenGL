@@ -3,13 +3,13 @@
 #include "Test.h"
 
 #include <memory>
-#include "vendor/glm/glm.hpp"
+#include "../vendor/glm/glm.hpp"
 
-#include "VertexArray.h"
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
-#include "Shader.h"
-#include "Texture.h"
+#include "../VertexArray.h"
+#include "../VertexBuffer.h"
+#include "../IndexBuffer.h"
+#include "../Shader.h"
+#include "../Texture.h"
 
 namespace test
 {
