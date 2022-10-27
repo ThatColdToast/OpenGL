@@ -2,7 +2,7 @@
 
 #include <GL/glew.h>
 
-#include "cherno/Instrumentor.h"
+#include "Profiling.h"
 
 #include "GLCall.h"
 #include "VertexBufferLayout.h"

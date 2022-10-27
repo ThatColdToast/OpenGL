@@ -33,17 +33,13 @@ private:
 public:
 	VertexBufferLayout();
 
-	template<typename T>
-	void Push(unsigned int count);
+	void PushAny(unsigned int count, unsigned int OPENGL_TYPE);
 
-	template<>
-	void Push<float>(unsigned int count);
+	void PushFloat(unsigned int count);
 
-	template<>
-	void Push<unsigned int>(unsigned int count);
+	void PushUnsignedInt(unsigned int count);
 
-	template<>
-	void Push<unsigned char>(unsigned int count);
+	void PushUnsignedChar(unsigned int count);
 
 	const std::vector<VertexBufferElement> GetElements() const;
 	unsigned int GetStride() const;

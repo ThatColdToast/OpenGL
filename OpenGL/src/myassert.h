@@ -1,6 +1,7 @@
 #pragma once
 
-#define ASSERT(x) if (!(x)) assert(0);
+#include <assert.h>
+#define ASSERT(x) if (!(x)) __assert("Assert 1", 0, "Assert 2");
 
 // #include <signal.h>
 

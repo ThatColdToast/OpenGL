@@ -1,4 +1,4 @@
-#include "TestTexture2D.h"
+#include "tests/TestTexture2D.h"
 
 #include <GL/glew.h>
 
@@ -8,7 +8,7 @@
 #include "vendor/imgui/imgui.h"
 
 #include "vendor/glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
+#include "vendor/glm/gtc/matrix_transform.hpp"
 
 #include "VertexArray.h"
 #include "IndexBuffer.h"
@@ -47,8 +47,8 @@ namespace test
 		m_VBO = std::make_unique<VertexBuffer>(positions, 4 * 4 * sizeof(float));
 
 		VertexBufferLayout layout;
-		layout.Push<float>(2); // Push 2 Positions ()
-		layout.Push<float>(2); // Push 2 TexCoords
+		layout.PushFloat(2); // Push 2 Positions ()
+		layout.PushFloat(2); // Push 2 TexCoords
 
 		m_VAO->AddBuffer(*m_VBO, layout);
 

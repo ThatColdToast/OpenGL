@@ -1,6 +1,6 @@
 #include "Texture.h"
 
-#include "stb_image/stb_image.h"
+#include "vendor/stb_image/stb_image.h"
 #include "Profiling.h"
 
 Texture::Texture(const std::string& filepath)

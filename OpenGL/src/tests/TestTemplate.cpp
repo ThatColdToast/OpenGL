@@ -1,4 +1,4 @@
-#include "TestTemplate.h"
+#include "tests/TestTemplate.h"
 
 #include <GL/glew.h>
 #include "Profiling.h"

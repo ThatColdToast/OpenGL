@@ -1,4 +1,4 @@
-#include "TestClearColor.h"
+#include "tests/TestClearColor.h"
 
 #include <GL/glew.h>
 #include "Profiling.h"
