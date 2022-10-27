@@ -34,14 +34,21 @@ CXXFLAGS= -g -Wall -std=c++17 -iquote OpenGL/src -isystem Dependencies/GLEW/incl
 
 compile: $(TARGET)
 
-run: $(TARGET)
+run: compile
 	./$(TARGET)
 
+
+ifeq ($(OS),Windows_NT) # Windows
 clean:
-	-rm -f $(OBJECTS)
-	-rm -f $(TARGET)
-
-
+	rm -f $(shell powershell /C dir -Include *.o -Recurse -Name)
+	rm -f $(shell powershell /C dir -Include *.exe -Recurse -Name)
+#	Remove-Item '*' -Recurse -Include *.o
+#	Remove-Item '*' -Recurse -Include *.exe
+else # Linux/MacOS/Unix/BSD
+clean:
+	rm -f $(shell find . -type f -name "*.o")
+	rm -f $(shell find . -type f -name "*.exe")
+endif
 
 SRCS:=
 
