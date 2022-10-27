@@ -1,19 +1,47 @@
-TARGET = executable
-DIRS = src
-LDLIBS = -L/Dependencies/GLEW/lib/Release/x64 -L/Dependencies/GLFW/lib-vc2022 -lglew32.lib -lglfw3.lib
+# Include Dirs
+# -idirafter
+# -isystem
+# -iquote
+
+# Linker Dirs
+# -L
+# Linker Flags
+# -l
+
+TARGET = Application.exe
+LDLIBS = Dependencies/GLEW/lib/Release/x64/glew32s.lib Dependencies/GLFW/lib-mingw-w64/glfw3.dll -lopengl32
+
+# LDLIBS = -LDependencies/GLEW/lib/Release/x64 -LDependencies/GLFW/lib-vc2022 -lglew32 -lglfw3
+# LDLIBS = -LDependencies/GLEW/lib/Release/x64 -LDependencies/GLFW/lib-mingw-w64 -lglew32 -lglfw3
+#-rpathDependencies/GLFW/lib-vc2022
+
+# LDLIBS = -L./Dependencies/GLEW/lib/Release/x64 -L./Dependencies/GLFW/lib-vc2022 -lglew32.lib -lglfw3.lib
+
 # LDLIBS = -l Dependencies/GLEW/lib/Release/x64/glew32.lib -l Dependencies/GLFW/lib-vc2022/glfw3.lib
+EXEFLAGS = 
 
 #VPATH = src
 
 CXX = g++
 
-CXXFLAGS= -g -Wall -std=c++17 -isystem Dependencies/GLEW/include -isystem Dependencies/GLFW/include -isystem OpenGL/src/vendor -I OpenGL/src/vendor/imgui -iquote OpenGL/src
-.PHONY: default compile clean run
+# Debug
+CXXFLAGS= -g -Wall -std=c++17 -iquote OpenGL/src -isystem Dependencies/GLEW/include -isystem Dependencies/GLFW/include -isystem OpenGL/src/vendor -I OpenGL/src/vendor/imgui -I OpenGL/src/vendor/stb_image
 
-default: $(TARGET)
-	./$(TARGET)
+# Release
+# CXXFLAGS= -Wall -std=c++17 -iquote OpenGL/src -isystem Dependencies/GLEW/include -isystem Dependencies/GLFW/include -isystem OpenGL/src/vendor -I OpenGL/src/vendor/imgui -I OpenGL/src/vendor/stb_image
+
+.PHONY: compile clean run
 
 compile: $(TARGET)
+
+run: $(TARGET)
+	./$(TARGET)
+
+clean:
+	-rm -f $(OBJECTS)
+	-rm -f $(TARGET)
+
+
 
 SRCS:=
 
@@ -27,6 +55,7 @@ else
 endif
 
 OBJECTS := $(patsubst %.cpp, %.o, $(SRCS))
+# OBJECTS := $(patsubst %src, %out, $(patsubst %.cpp, %.o, $(SRCS)))
 #HEADERS := $(wildcard *.h)
 
 # build the executable
@@ -38,19 +67,4 @@ OBJECTS := $(patsubst %.cpp, %.o, $(SRCS))
 
 # build the objects
 $(TARGET): $(OBJECTS)
-	@echo OBJS $(OBJECTS)
-	$(CXX) $(OBJECTS) $(EXEFLAGS) $(LDLIBS) -o $@
-
-clean:
-	-rm -f $(OBJECTS)
-	-rm -f $(TARGET)
-
-# Include Dirs
-# -idirafter
-# -isystem
-# -iquote
-
-# Linker Dirs
-# -L
-# Linker Flags
-# -l
+	$(CXX) $(OBJECTS) $(LDLIBS) $(EXEFLAGS) -o $@

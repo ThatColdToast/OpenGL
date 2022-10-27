@@ -16,9 +16,9 @@
 #include "vendor/glm/glm.hpp"
 #include "vendor/glm/gtc/matrix_transform.hpp"
 
-#include "vendor/imgui/imgui.h"
-#include "vendor/imgui/imgui_impl_opengl3.h"
-#include "vendor/imgui/imgui_impl_glfw.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_opengl3.h"
+#include "imgui/imgui_impl_glfw.h"
 
 #include "Profiling.h"
 
@@ -194,6 +194,7 @@ int main(void)
 
 				ImGui::Render();
 				ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+				// ImGui::EndFrame();
 			}
 
 			{
