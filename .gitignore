@@ -1,5 +1,5 @@
 .vscode/*
 *.o
+*.stackdump
 
-OpenGL/x64/**
 OpenGL/imgui.ini
