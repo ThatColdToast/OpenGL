@@ -26,7 +26,7 @@
 #include "tests/TestClearColor.h"
 #include "tests/TestTexture2D.h"
 
-int main_disabled(void)
+int main_GLTestingFramework(void)
 {
 	Instrumentor::Get().BeginSession("Init", "init.json");
 	/* GLFW INIT */

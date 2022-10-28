@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <chrono>
 
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -14,7 +15,7 @@
 
 #include "GLCall.h"
 
-int main(void)
+int main_GLTestApplication(void)
 {
 	/* GLFW INIT */
 	GLFWwindow* window;
@@ -53,7 +54,7 @@ int main(void)
 		/* Make the window's context current */
 		glfwMakeContextCurrent(window);
 
-		glfwSwapInterval(1); // Turn Vsync on
+		glfwSwapInterval(0); // Turn Vsync on
 	}
 
 	/* GLEW INIT */
@@ -90,8 +91,26 @@ int main(void)
 		GLCall(glEnable(GL_BLEND));
 		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
+		auto start_time = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch());
+		double smoothDeltaTime = start_time.count() - start_time.count();
+		long frameNumber = 0;
+
 		while (!glfwWindowShouldClose(window))
 		{
+			frameNumber++;
+			auto current_time = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch());
+			double deltaTime = current_time.count() - start_time.count();
+			start_time = current_time;
+
+			smoothDeltaTime = ((smoothDeltaTime * 99.0) + deltaTime) / 100.0;
+			double smoothFPS = (1000000.0 / smoothDeltaTime);
+
+			// std::printf("dt(%f) smooth dt(%f)\n", deltaTime, smoothDeltaTime);
+
+			// 10 Times per second, print fps
+			// if(frameNumber % ((int)(smoothFPS) / 10) == 0) std::printf("fps(%.0f)\n", smoothFPS);
+			if(frameNumber % 30 == 0) std::printf("fps(%.0f)\n", smoothFPS);
+
             {
 				/* Poll for and process events */
 				glfwPollEvents();
