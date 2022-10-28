@@ -1,10 +1,10 @@
-#include "Renderer.h"
+#include "Graphics/Renderer.h"
 
 #include <iostream>
 
-#include "Profiling.h"
+#include "Utils/Profiling.h"
 
-#include "GLCall.h"
+#include "Graphics/GLCall.h"
 
 void GLClearError()
 {

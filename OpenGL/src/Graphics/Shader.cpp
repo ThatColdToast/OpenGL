@@ -1,4 +1,4 @@
- #include "Shader.h"
+ #include "Graphics/Shader.h"
 
 #include <iostream>
 #include <fstream>
@@ -6,9 +6,9 @@
 
 #include <GL/glew.h>
 
-#include "GLCall.h"
+#include "Graphics/GLCall.h"
 
-#include "Profiling.h"
+#include "Utils/Profiling.h"
 
 Shader::Shader(const std::string& filepath)
 	: m_FilePath(filepath), m_RendererID(0)

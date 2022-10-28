@@ -1,11 +1,11 @@
-#include "VertexArray.h"
+#include "Graphics/VertexArray.h"
 
 #include <GL/glew.h>
 
-#include "Profiling.h"
+#include "Utils/Profiling.h"
 
-#include "GLCall.h"
-#include "VertexBufferLayout.h"
+#include "Graphics/GLCall.h"
+#include "Graphics/VertexBufferLayout.h"
 
 VertexArray::VertexArray()
 {

@@ -1,14 +1,14 @@
 #include <iostream>
 #include <string>
 
-#include "Renderer.h"
+#include "Graphics/Renderer.h"
 
-#include "VertexArray.h"
-#include "VertexBuffer.h"
-#include "VertexBufferLayout.h"
-#include "IndexBuffer.h"
-#include "Shader.h"
-#include "Texture.h"
+#include "Graphics/VertexArray.h"
+#include "Graphics/VertexBuffer.h"
+#include "Graphics/VertexBufferLayout.h"
+#include "Graphics/IndexBuffer.h"
+#include "Graphics/Shader.h"
+#include "Graphics/Texture.h"
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -20,7 +20,7 @@
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui_impl_glfw.h"
 
-#include "Profiling.h"
+#include "Utils/Profiling.h"
 
 #include "tests/Test.h"
 #include "tests/TestClearColor.h"

@@ -1,8 +1,8 @@
 #include "tests/TestTemplate.h"
 
 #include <GL/glew.h>
-#include "Profiling.h"
-#include "GLCall.h"
+#include "Utils/Profiling.h"
+#include "Graphics/GLCall.h"
 #include "vendor/imgui/imgui.h"
 
 namespace test

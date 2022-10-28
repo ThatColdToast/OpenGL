@@ -5,11 +5,11 @@
 #include <memory>
 #include "../vendor/glm/glm.hpp"
 
-#include "../VertexArray.h"
-#include "../VertexBuffer.h"
-#include "../IndexBuffer.h"
-#include "../Shader.h"
-#include "../Texture.h"
+#include "Graphics/VertexArray.h"
+#include "Graphics/VertexBuffer.h"
+#include "Graphics/IndexBuffer.h"
+#include "Graphics/Shader.h"
+#include "Graphics/Texture.h"
 
 namespace test
 {

@@ -1,10 +1,10 @@
-#include "VertexBuffer.h"
+#include "Graphics/VertexBuffer.h"
 
 #include <GL/glew.h>
 
-#include "Profiling.h"
+#include "Utils/Profiling.h"
 
-#include "GLCall.h"
+#include "Graphics/GLCall.h"
 
 VertexBuffer::VertexBuffer(const void* data, unsigned int size)
 {

@@ -18,17 +18,18 @@ LDLIBS = Dependencies/GLEW/lib/Release/x64/glew32s.lib Dependencies/GLFW/lib-min
 # LDLIBS = -L./Dependencies/GLEW/lib/Release/x64 -L./Dependencies/GLFW/lib-vc2022 -lglew32.lib -lglfw3.lib
 
 # LDLIBS = -l Dependencies/GLEW/lib/Release/x64/glew32.lib -l Dependencies/GLFW/lib-vc2022/glfw3.lib
-EXEFLAGS = 
 
 #VPATH = src
 
 CXX = g++
 
 # Debug
-CXXFLAGS= -g -Wall -std=c++17 -iquote OpenGL/src -isystem Dependencies/GLEW/include -isystem Dependencies/GLFW/include -isystem OpenGL/src/vendor -I OpenGL/src/vendor/imgui -I OpenGL/src/vendor/stb_image
+# CXXFLAGS= -g -Wall -std=c++17 -Og -fdata-sections -ffunction-sections -iquote OpenGL/src -isystem Dependencies/GLEW/include -isystem Dependencies/GLFW/include -isystem OpenGL/src/vendor -I OpenGL/src/vendor/imgui -I OpenGL/src/vendor/stb_image
+# EXEFLAGS = -Wl,--gc-sections
 
 # Release
-# CXXFLAGS= -Wall -std=c++17 -iquote OpenGL/src -isystem Dependencies/GLEW/include -isystem Dependencies/GLFW/include -isystem OpenGL/src/vendor -I OpenGL/src/vendor/imgui -I OpenGL/src/vendor/stb_image
+CXXFLAGS= -Wall -std=c++17 -O3 -fdata-sections -ffunction-sections -iquote OpenGL/src -isystem Dependencies/GLEW/include -isystem Dependencies/GLFW/include -isystem OpenGL/src/vendor -I OpenGL/src/vendor/imgui -I OpenGL/src/vendor/stb_image
+EXEFLAGS = -Wl,--gc-sections
 
 .PHONY: compile clean run
 

@@ -1,8 +1,8 @@
-#include "VertexBufferLayout.h"
+#include "Graphics/VertexBufferLayout.h"
 
 #include <vector>
 
-#include "Profiling.h"
+#include "Utils/Profiling.h"
 
 VertexBufferLayout::VertexBufferLayout()
 	: m_Stride(0) {}

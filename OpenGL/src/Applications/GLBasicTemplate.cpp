@@ -13,13 +13,16 @@
 #include "imgui/imgui_impl_opengl3.h"
 #include "imgui/imgui_impl_glfw.h"
 
-#include "GLCall.h"
-#include "Profiling.h"
-#include "Timing.h"
+#include "Graphics/GLCall.h"
+#include "Utils/Profiling.h"
+#include "Utils/Timing.h"
 
-int main_GLGame(void)
+
+
+int main_GLBasicTemplate(void)
 {
 	Instrumentor::Get().BeginSession("Init", "init.json");
+	Timer g_GameTimer;
 
 	/* GLFW INIT */
 	GLFWwindow* window;
@@ -103,13 +106,11 @@ int main_GLGame(void)
 		GLCall(glEnable(GL_BLEND));
 		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
-		Timer timer;
-
 		while (!glfwWindowShouldClose(window))
 		{
-			timer.UpdateTime();
+			g_GameTimer.UpdateTime();
 
-			if(timer.frameNumber() % 30 == 0) std::printf("fps(%.0f)\n", timer.frameRateSmooth());
+			if(g_GameTimer.frameNumber() % 30 == 0) std::printf("fps(%.0f)\n", g_GameTimer.frameRateSmooth());
 
             {
 				/* Poll for and process events */

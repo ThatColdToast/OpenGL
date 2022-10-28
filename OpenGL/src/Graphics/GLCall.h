@@ -1,6 +1,6 @@
 #pragma once
 
-#include "myassert.h"
+#include "Utils/myassert.h"
 
 #define GLCall(x) GLClearError();\
     x;\

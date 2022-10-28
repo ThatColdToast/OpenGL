@@ -2,18 +2,18 @@
 
 #include <GL/glew.h>
 
-#include "Profiling.h"
+#include "Utils/Profiling.h"
 
-#include "GLCall.h"
+#include "Graphics/GLCall.h"
 #include "vendor/imgui/imgui.h"
 
 #include "vendor/glm/glm.hpp"
 #include "vendor/glm/gtc/matrix_transform.hpp"
 
-#include "VertexArray.h"
-#include "IndexBuffer.h"
-#include "Shader.h"
-#include "Texture.h"
+#include "Graphics/VertexArray.h"
+#include "Graphics/IndexBuffer.h"
+#include "Graphics/Shader.h"
+#include "Graphics/Texture.h"
 
 namespace test
 {
@@ -58,7 +58,7 @@ namespace test
 		view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 
 		m_Shader = std::make_unique<Shader>("res/shaders/Basic.shader");
-		m_Texture = std::make_unique<Texture>("res/textures/dirt.png");
+		m_Texture = std::make_unique<Texture>("res/textures/test.png");
 		m_Texture->Bind();
 		m_Shader->Bind();
 		m_Shader->SetUniform1i("u_Texture", 0);

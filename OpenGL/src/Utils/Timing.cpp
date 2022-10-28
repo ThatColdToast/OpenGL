@@ -1,4 +1,4 @@
-#include "Timing.h"
+#include "Utils/Timing.h"
 
 #include <iostream>
 
@@ -8,7 +8,7 @@ Timer::Timer()
     m_old_time = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch());
 
     m_frameNumber = 0;
-    m_sFactor = 100;
+    m_sFactor = 50;
 
     m_deltaTime = 0.0;
     m_deltaTimeSmooth = 0.0;
@@ -38,15 +38,16 @@ void Timer::UpdateTime()
     
     unsigned long max = 0;
     max--;
-    std::cout << max << std::endl;
+    // std::cout << max << std::endl;
     if(m_frameNumber >= max) std::cerr << "Error: (Timing.cpp) frameNumber Overflow" << std::endl;
 
     m_new_time = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch());
-    m_deltaTime = m_new_time.count() - m_old_time.count();
+    m_deltaTime = (m_new_time.count() - m_old_time.count()) / 1000.0;
+    m_old_time = m_new_time;
     m_deltaTimeSmooth = ((m_deltaTimeSmooth * (m_sFactor-1)) + m_deltaTime) / m_sFactor;
 
-    m_frameRate = (1000000.0 / m_deltaTime);
-    m_frameRateSmooth = (1000000.0 / m_deltaTimeSmooth);
+    m_frameRate = (1000.0 / m_deltaTime);
+    m_frameRateSmooth = (1000.0 / m_deltaTimeSmooth);
 };
 
 double Timer::deltaTime()

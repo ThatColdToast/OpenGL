@@ -1,7 +1,7 @@
-#include "Texture.h"
+#include "Graphics/Texture.h"
 
 #include "vendor/stb_image/stb_image.h"
-#include "Profiling.h"
+#include "Utils/Profiling.h"
 
 Texture::Texture(const std::string& filepath)
 	: m_RendererID(0), m_FilePath(filepath), m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BPP(0)
