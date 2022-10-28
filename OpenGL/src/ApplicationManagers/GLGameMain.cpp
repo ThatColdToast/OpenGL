@@ -4,10 +4,10 @@
 #include <GLFW/glfw3.h>
 
 #include "Graphics/GLCall.h"
+
+#define PROFILING 1
 #include "Utils/Profiling.h"
 #include "Utils/Timing.h"
-
-
 
 int main_GLGame(void)
 {
@@ -74,18 +74,18 @@ int main_GLGame(void)
 	}
 
 	{
-		// float positions[] = {
-		// 	-50.0f, -50.0f, 0.0f, 0.0f, // 0
-		// 	 50.0f, -50.0f, 1.0f, 0.0f, // 1
-		// 	 50.0f,  50.0f, 1.0f, 1.0f, // 2
-		// 	-50.0f,  50.0f, 0.0f, 1.0f  // 3
-		// };
+		float vertices[] = {
+			-50.0f, -50.0f, 0.0f, 0.0f, // 0
+			 50.0f, -50.0f, 1.0f, 0.0f, // 1
+			 50.0f,  50.0f, 1.0f, 1.0f, // 2
+			-50.0f,  50.0f, 0.0f, 1.0f  // 3
+		};
 
-		// unsigned int indices[] =
-		// {
-		// 	0, 1, 2,
-		// 	2, 3, 0
-		// };
+		unsigned int indices[] =
+		{
+			0, 1, 2,
+			2, 3, 0
+		};
 
         /* OpenGL Viewport */
         GLCall(glViewport(0, 0, screenWidth, screenHeight));
@@ -94,31 +94,44 @@ int main_GLGame(void)
 		GLCall(glEnable(GL_BLEND));
 		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
+		Instrumentor::Get().EndSession();
+		Instrumentor::Get().BeginSession("Loop", "loop.json");
+		/* Loop until the user closes the window */
 		while (!glfwWindowShouldClose(window))
 		{
+			PROFILE_SCOPE("Window Loop");
 			g_GameTimer.UpdateTime();
 
 			if(g_GameTimer.frameNumber() % 100 == 0) std::printf("fps(%.2f)\n", g_GameTimer.frameRateSmooth());
 
+			/* Poll for and process events */
             {
-				/* Poll for and process events */
+				PROFILE_SCOPE("Poll For Events");
 				glfwPollEvents();
 				glfwGetWindowSize(window, &screenWidth, &screenHeight);
 			}
 
 			/* Update Scene */
+			{
+				PROFILE_SCOPE("Update Scene");
+			}
 			
 
-			/* Render here */
-			GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
-            // GLCall(glClear(GL_COLOR_BUFFER_BIT));
-
+			/* Render Scene */
 			{
-				/* Swap front and back buffers */
+				PROFILE_SCOPE("Render Scene");
+				GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
+            	// GLCall(glClear(GL_COLOR_BUFFER_BIT));
+			}
+
+			/* Swap front and back buffers */
+			{
+				PROFILE_SCOPE("Swap Buffers");
 				glfwSwapBuffers(window);
 			}
 		}
 	}
+	Instrumentor::Get().EndSession();
 
 	glfwTerminate();
 	return 0;
