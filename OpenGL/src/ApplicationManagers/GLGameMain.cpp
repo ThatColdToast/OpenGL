@@ -74,18 +74,18 @@ int main_GLGame(void)
 	}
 
 	{
-		float vertices[] = {
-			-50.0f, -50.0f, 0.0f, 0.0f, // 0
-			 50.0f, -50.0f, 1.0f, 0.0f, // 1
-			 50.0f,  50.0f, 1.0f, 1.0f, // 2
-			-50.0f,  50.0f, 0.0f, 1.0f  // 3
-		};
+		// float vertices[] = {
+		// 	-50.0f, -50.0f, 0.0f, 0.0f, // 0
+		// 	 50.0f, -50.0f, 1.0f, 0.0f, // 1
+		// 	 50.0f,  50.0f, 1.0f, 1.0f, // 2
+		// 	-50.0f,  50.0f, 0.0f, 1.0f  // 3
+		// };
 
-		unsigned int indices[] =
-		{
-			0, 1, 2,
-			2, 3, 0
-		};
+		// unsigned int indices[] =
+		// {
+		// 	0, 1, 2,
+		// 	2, 3, 0
+		// };
 
         /* OpenGL Viewport */
         GLCall(glViewport(0, 0, screenWidth, screenHeight));
