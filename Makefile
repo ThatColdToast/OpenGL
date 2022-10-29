@@ -30,7 +30,7 @@ CXX = g++
 
 # Debug
 # debug: $(TARGET)
-CXXFLAGS= -g -Wall -std=c++17 -Og -fdata-sections -ffunction-sections -iquote OpenGL/src -isystem Dependencies/GLEW/include -isystem Dependencies/GLFW/include -isystem OpenGL/src/vendor -I OpenGL/src/vendor/imgui -I OpenGL/src/vendor/stb_image
+CXXFLAGS= -Wall -std=c++17 -g -Og -fdata-sections -ffunction-sections -iquote OpenGL/src -isystem Dependencies/GLEW/include -isystem Dependencies/GLFW/include -isystem OpenGL/src/vendor -I OpenGL/src/vendor/imgui -I OpenGL/src/vendor/stb_image
 EXEFLAGS = -Wl,--gc-sections
 
 # Release

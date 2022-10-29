@@ -1,5 +1,7 @@
 #include "Graphics/Texture.h"
 
+#include <iostream>
+
 #include "vendor/stb_image/stb_image.h"
 #include "Utils/Profiling.h"
 

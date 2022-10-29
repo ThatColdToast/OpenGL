@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Applications/Applications.h"
+#include "ApplicationManagers/Applications.h"
 
 int main()
 {
