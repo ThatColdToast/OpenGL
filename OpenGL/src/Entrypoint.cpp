@@ -1,9 +1,9 @@
 #include <iostream>
 
-#include "ApplicationManagers/Applications.h"
+#include "Entrypoint.h"
 
 int main()
 {
     std::cout << "Starting Application..." << std::endl;
-    main_GLGame();
+    main_GLApplication();
 }
