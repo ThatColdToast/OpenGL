@@ -8,7 +8,7 @@
 
 #include "Graphics/GLCall.h"
 
-#define PROFILING 1
+#define PROFILING 0
 #include "Utils/Profiling.h"
 #include "Utils/Timing.h"
 

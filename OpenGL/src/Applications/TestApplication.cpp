@@ -16,7 +16,7 @@
 #include "Graphics/Texture.h"
 
 TestApplication::TestApplication()
-    : m_TranslationA(200, 200, 0), m_TranslationB(400, 200, 0)
+    : m_TranslationA(0.0, 0.0, 0.5), m_TranslationB(300.0, 200.0, 1.0), m_TranslationC(600.0, 400.0, 2.0)
 {
     PROFILE_FUNCTION();
 
@@ -50,8 +50,13 @@ TestApplication::TestApplication()
 
     m_IBO = std::make_unique<IndexBuffer>(indices, 6);
 
-    proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
-    view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+    m_proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
+    // m_proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, 0.01f, 1.0f);
+    // m_proj = glm::perspective(90.0f, 16.0f / 9.0f, 0.01f, 100.0f);
+    // m_proj = glm::perspective(90.0f, 16.0f / 9.0f, -1.0f, 100.0f);
+    // m_proj = glm::perspectiveFov(90.0f, 1920.0f, 1080.0f, 0.01f, 100.0f);
+    m_view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+    // m_view = glm::translate(glm::toMat4(glm::quat), glm::vec3(0, 0, 0));
 
     m_Shader = std::make_unique<Shader>("OpenGL/res/shaders/Basic.shader");
     m_Texture = std::make_unique<Texture>("OpenGL/res/textures/test.png");
@@ -63,6 +68,9 @@ TestApplication::TestApplication()
     m_VBO->Unbind();
     m_IBO->Unbind();
     m_Shader->Unbind();
+
+    /* Application Specific */
+    m_CameraTranslation = glm::vec3(0, 0, 0);
 }
 
 TestApplication::~TestApplication()
@@ -71,12 +79,18 @@ TestApplication::~TestApplication()
 
 void TestApplication::OnUpdate(Timer g_timer)
 {
+    // m_TranslationA.x += g_timer.deltaTime() * 0.05;
+    // m_TranslationB.x += g_timer.deltaTime() * 0.05;
+    // m_TranslationB.y += g_timer.deltaTime() * 0.05;
+
+    // m_CameraTranslation.x += g_timer.deltaTime() * 0.01;
+    // m_view = glm::translate(glm::mat4(1.0f), m_CameraTranslation);
 }
 
 void TestApplication::OnRender()
 {
-    // GLCall(glClearColor(0.0f, 0.0f, 0.0f, 0.0f));
-    // GLCall(glClear(GL_COLOR_BUFFER_BIT));
+    GLCall(glClearColor(0.0f, 0.05f, 0.2f, 0.0f));
+    GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
     Renderer renderer;
 
@@ -85,7 +99,7 @@ void TestApplication::OnRender()
     {
         PROFILE_SCOPE("Set 1st Uniform Mat4");
         glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationA);
-        glm::mat4 mvp = proj * view * model;
+        glm::mat4 mvp = m_proj * m_view * model;
         m_Shader->SetUniformMat4f("u_MVP", mvp);
 
         renderer.Draw(*m_VAO, *m_IBO, *m_Shader);
@@ -94,7 +108,16 @@ void TestApplication::OnRender()
     {
         PROFILE_SCOPE("Set 2nd Uniform Mat4");
         glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationB);
-        glm::mat4 mvp = proj * view * model;
+        glm::mat4 mvp = m_proj * m_view * model;
+        m_Shader->SetUniformMat4f("u_MVP", mvp);
+
+        renderer.Draw(*m_VAO, *m_IBO, *m_Shader);
+    }
+
+    {
+        PROFILE_SCOPE("Set 3rd Uniform Mat4");
+        glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationC);
+        glm::mat4 mvp = m_proj * m_view * model;
         m_Shader->SetUniformMat4f("u_MVP", mvp);
 
         renderer.Draw(*m_VAO, *m_IBO, *m_Shader);
