@@ -1,11 +1,13 @@
 #pragma once
 
+#include <string>
+
 #include "Utils/Timing.h"
 
 class Application
 {
 public:
-	const char* m_Name;
+	std::string m_Name;
 
 	Application() : m_Name("Template Application") {}
 	virtual ~Application() {}

@@ -13,6 +13,7 @@
 #include "Utils/Timing.h"
 
 #include "Applications/TestApplication.h"
+#include "Applications/PerspectiveApplication.h"
 
 int main_GLApplication(void)
 {
@@ -99,7 +100,10 @@ int main_GLApplication(void)
 		GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
 		/* Create Application Object */
-		TestApplication application;
+		PerspectiveApplication application;
+		// TestApplication application;
+
+		glfwSetWindowTitle(window, application.m_Name.c_str());
 
 		Instrumentor::Get().EndSession();
 		Instrumentor::Get().BeginSession("Loop", "loop.json");

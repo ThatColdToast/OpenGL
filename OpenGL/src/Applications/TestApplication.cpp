@@ -51,10 +51,6 @@ TestApplication::TestApplication()
     m_IBO = std::make_unique<IndexBuffer>(indices, 6);
 
     m_proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
-    // m_proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, 0.01f, 1.0f);
-    // m_proj = glm::perspective(90.0f, 16.0f / 9.0f, 0.01f, 100.0f);
-    // m_proj = glm::perspective(90.0f, 16.0f / 9.0f, -1.0f, 100.0f);
-    // m_proj = glm::perspectiveFov(90.0f, 1920.0f, 1080.0f, 0.01f, 100.0f);
     m_view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
     // m_view = glm::translate(glm::toMat4(glm::quat), glm::vec3(0, 0, 0));
 
