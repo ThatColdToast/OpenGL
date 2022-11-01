@@ -8,7 +8,8 @@
 # Linker Flags
 # -l
 
-TARGET = Application.exe
+PROJECT = OpenGL
+TARGET = $(PROJECT)/Application.exe
 LDLIBS = Dependencies/GLEW/lib/Release/x64/glew32s.lib Dependencies/GLFW/lib-mingw-w64/glfw3.dll -lopengl32
 
 # LDLIBS = -LDependencies/GLEW/lib/Release/x64 -LDependencies/GLFW/lib-vc2022 -lglew32 -lglfw3
