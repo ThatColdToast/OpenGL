@@ -143,7 +143,7 @@ int main_GLApplication(void)
 			/* Render Scene */
 			{
 				PROFILE_SCOPE("Render Scene");
-				GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
+				// GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
 				// GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
 				application.OnRender();
