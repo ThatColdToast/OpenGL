@@ -35,40 +35,40 @@ PerspectiveApplication::PerspectiveApplication()
         // -1.0f,  1.0f,  1.0f, 0.0f, 1.0f, // 7 TLB
 
         // Front
-        -0.5f, -0.5f, -0.5f, 0.0, 0.0, // 0 BLF
-         0.5f, -0.5f, -0.5f, 1.0, 0.0, // 1 BRF
-         0.5f,  0.5f, -0.5f, 1.0, 1.0, // 2 TRF
-        -0.5f,  0.5f, -0.5f, 0.0, 1.0, // 3 TLF
+        -0.5f, -0.5f,  0.5f, 0.0, 0.0, // 0 BLF
+         0.5f, -0.5f,  0.5f, 1.0, 0.0, // 1 BRF
+         0.5f,  0.5f,  0.5f, 1.0, 1.0, // 2 TRF
+        -0.5f,  0.5f,  0.5f, 0.0, 1.0, // 3 TLF
 
         // Right
-         0.5f, -0.5f, -0.5f, 0.0, 0.0, // 4 BRF
-         0.5f, -0.5f,  0.5f, 1.0, 0.0, // 5 BRB
-         0.5f,  0.5f,  0.5f, 1.0, 1.0, // 6 TRB
-         0.5f,  0.5f, -0.5f, 0.0, 1.0, // 7 TRF
+         0.5f, -0.5f,  0.5f, 0.0, 0.0, // 4 BRF
+         0.5f, -0.5f, -0.5f, 1.0, 0.0, // 5 BRB
+         0.5f,  0.5f, -0.5f, 1.0, 1.0, // 6 TRB
+         0.5f,  0.5f,  0.5f, 0.0, 1.0, // 7 TRF
 
          // Back
-         0.5f, -0.5f, 0.5f, 0.0, 0.0, // 8 BRB
-        -0.5f, -0.5f, 0.5f, 1.0, 0.0, // 9 BLB
-        -0.5f,  0.5f, 0.5f, 1.0, 1.0, // 10 TLB
-         0.5f,  0.5f, 0.5f, 0.0, 1.0, // 11 TRB
+         0.5f, -0.5f, -0.5f, 0.0, 0.0, // 8 BRB
+        -0.5f, -0.5f, -0.5f, 1.0, 0.0, // 9 BLB
+        -0.5f,  0.5f, -0.5f, 1.0, 1.0, // 10 TLB
+         0.5f,  0.5f, -0.5f, 0.0, 1.0, // 11 TRB
 
         // Left
-        -0.5f, -0.5f,  0.5f, 0.0, 0.0, // 12 BLB
-        -0.5f, -0.5f, -0.5f, 1.0, 0.0, // 13 BLF
-        -0.5f,  0.5f, -0.5f, 1.0, 1.0, // 14 TLF
-        -0.5f,  0.5f,  0.5f, 0.0, 1.0, // 15 TLB
+        -0.5f, -0.5f, -0.5f, 0.0, 0.0, // 12 BLB
+        -0.5f, -0.5f,  0.5f, 1.0, 0.0, // 13 BLF
+        -0.5f,  0.5f,  0.5f, 1.0, 1.0, // 14 TLF
+        -0.5f,  0.5f, -0.5f, 0.0, 1.0, // 15 TLB
 
         // Top
-        -0.5f,  0.5f, -0.5f, 0.0, 0.0, // 16 TLF
-         0.5f,  0.5f, -0.5f, 1.0, 0.0, // 17 TRF
-         0.5f,  0.5f,  0.5f, 1.0, 1.0, // 18 TRB
-        -0.5f,  0.5f,  0.5f, 0.0, 1.0, // 19 TLB
+        -0.5f,  0.5f,  0.5f, 0.0, 0.0, // 16 TLF
+         0.5f,  0.5f,  0.5f, 1.0, 0.0, // 17 TRF
+         0.5f,  0.5f, -0.5f, 1.0, 1.0, // 18 TRB
+        -0.5f,  0.5f, -0.5f, 0.0, 1.0, // 19 TLB
 
         // Bottom
-        -0.5f, -0.5f,  0.5f, 0.0, 0.0, // 20 BLB
-         0.5f, -0.5f,  0.5f, 1.0, 0.0, // 21 BRB
-        -0.5f, -0.5f, -0.5f, 1.0, 1.0, // 22 BLF
-         0.5f, -0.5f, -0.5f, 0.0, 1.0, // 23 BRF
+        -0.5f, -0.5f, -0.5f, 0.0, 0.0, // 20 BLB
+         0.5f, -0.5f, -0.5f, 1.0, 0.0, // 21 BRB
+         0.5f, -0.5f,  0.5f, 0.0, 1.0, // 22 BRF
+        -0.5f, -0.5f,  0.5f, 1.0, 1.0, // 23 BLF
     };
 
     unsigned int indices[] = {
@@ -124,10 +124,10 @@ PerspectiveApplication::PerspectiveApplication()
 
     m_IBO = std::make_unique<IndexBuffer>(indices, 3 * 2 * 6);
 
-    m_proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1000.0f);
+    // m_proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1000.0f);
     // m_proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, 0.01f, 1.0f);
     // m_proj = glm::perspective(glm::radians(45.0f), 16.0f / 9.0f, 0.1f, 100.0f);
-    // m_proj = glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, -1.0f, 100.0f);
+    m_proj = glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.01f, 100.0f);
     // m_proj = glm::perspectiveFov(90.0f, 1920.0f, 1080.0f, 0.01f, 100.0f);
     m_view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
     // m_view = glm::translate(glm::toMat4(glm::quat), glm::vec3(0, 0, 0));
@@ -167,7 +167,7 @@ void PerspectiveApplication::OnUpdate(Timer g_timer)
 
 void PerspectiveApplication::OnRender()
 {
-    const float scalar = 100.0f;
+    const float scalar = 10.0f;
     GLCall(glClearColor(0.0f, 0.05f, 0.2f, 0.0f));
     GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
@@ -225,9 +225,13 @@ void PerspectiveApplication::OnRender()
     //     renderer.Draw(*m_VAO, *m_IBO, *m_Shader);
     // }
 
+    m_proj = glm::perspective(glm::radians(120.0f), 16.0f / 9.0f, 0.01f, 100.0f);
+    m_view = glm::translate(glm::mat4(1.0f), glm::vec3(0.f, 0.0f, 0.0f));
+    // m_view = glm::translate(glm::rotate(glm::mat4(1.0f), glm::radians(m_rotation), glm::vec3(0.0f, 1.0f, 0.0f)), glm::vec3(10.f, 0.0f, 0.0f));
+
     {
         // Cube 1
-        glm::mat4 model = glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(scalar)), glm::vec3(1.0f, 0.0f, 0.0f));
+        glm::mat4 model = glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(scalar)), glm::vec3(-1.0f, 0.0f, -1.0f));
 
         glm::mat4 mvp = m_proj * m_view * model;
         m_Shader->SetUniformMat4f("u_MVP", mvp);
@@ -237,7 +241,8 @@ void PerspectiveApplication::OnRender()
 
     {
         // Cube 2
-        glm::mat4 model = glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(scalar)), glm::vec3(0.0f, 0.0f, 0.0f));
+        // glm::mat4 model = glm::rotate(glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(scalar)), glm::vec3(0.0f, 0.0f, -1.0f)), glm::radians(m_rotation), glm::vec3(0.0f, 1.0f, 0.0f));
+        glm::mat4 model = glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(scalar)), glm::vec3(0.0f, 0.0f, -1.0f));
 
         glm::mat4 mvp = m_proj * m_view * model;
         m_Shader->SetUniformMat4f("u_MVP", mvp);
